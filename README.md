@@ -1,2 +1,4 @@
 # Python.Basics_of_language
-Education
+Education.  
+**Основы языка Python.**  
+Учебные задания на портале GeekBrains.
