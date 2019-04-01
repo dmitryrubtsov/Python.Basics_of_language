@@ -13,5 +13,6 @@
 '''
 
 list_item = ["яблоко", "банан", "киви", "арбуз"]
-for i in list_item:
-    print(f'{list_item.index(i) + 1}. {i:>6}')
+offset = len(max(list_item, key=len))
+for index, item in enumerate(list_item, start=1):
+    print(f'{index}. {item.rjust(offset)}')
