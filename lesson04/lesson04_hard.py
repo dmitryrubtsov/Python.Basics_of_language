@@ -7,21 +7,23 @@
 # Ваша задача исправить ошибки логики, и выполнить проверки данных, которые вводит пользователь.
 # Обязательно убедитесь, что вы выполнили все проверки, попробуйте сами сломать свою программу вводя неверные данные!
 
-person1 = {'card': 4276123465440000, 'pin': 9090, 'money': 100.90}
-person2 = {'card': 4276123465440001, 'pin': 9091, 'money': 200.90}
-person3 = {'card': 4276123465440002, 'pin': 9092, 'money': 300.90}
+import secrets
+
+person1 = {'card': '4276123465440000', 'pin': '9090', 'money': 100.90}
+person2 = {'card': '4276123465440001', 'pin': '9091', 'money': 200.90}
+person3 = {'card': '4276123465440002', 'pin': '9092', 'money': 300.90}
 
 bank = [person1, person2, person3]
 
 
 def get_person_by_card(card_number):
     for person in bank:
-        if person['card'] == card_number:
+        if secrets.compare_digest(person['card'], card_number):
             return person
 
 
 def is_pin_valid(person, pin_code):
-    if person['pin'] == pin_code:
+    if secrets.compare_digest(person['pin'], pin_code):
         return True
     return False
 
@@ -52,11 +54,8 @@ def process_user_choice(choice, person):
 def start():
     card_number, pin_code, *_ = input('Введите номер карты и пин код через пробел:').split()
 
-    try:
-        card_number = int(card_number)
-        pin_code = int(pin_code)
-    except ValueError:
-        print('Номер карты и пин код должен состоять только из цифр.')
+    card_number = card_number
+    pin_code = pin_code
     person = get_person_by_card(card_number)
     if person and is_pin_valid(person, pin_code):
         while True:
